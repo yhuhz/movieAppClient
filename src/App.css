@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-html {
+/* html {
   ::-webkit-scrollbar {
     display: none;
   }
-}
+} */
 
 body {
   margin: 0;
@@ -17,18 +17,26 @@ body {
   background: #1a1a1a;
 }
 
+.card-body-custom {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 h1,
+h2,
 h4,
 span {
   color: #6ac045 !important;
 }
 
 h1,
+h2,
 h4 {
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 2px;

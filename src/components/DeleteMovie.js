@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { Notyf } from 'notyf';
 
-export default function DeleteWorkout({ workout, getWorkoutData }) {
+export default function DeleteMovie({ movie, getMovieData }) {
   const notyf = new Notyf();
 
-  const [workoutId] = useState(workout._id);
+  const [movieId] = useState(movie._id);
 
   const [showDelete, setShowDelete] = useState(false);
 
@@ -17,11 +17,11 @@ export default function DeleteWorkout({ workout, getWorkoutData }) {
     setShowDelete(false);
   };
 
-  const deleteWorkout = (e, workoutId) => {
+  const deleteMovie = (e, movieId) => {
     e.preventDefault();
 
     fetch(
-      `${process.env.REACT_APP_API_BASE_URL}/workouts/deleteWorkout/${workoutId}`,
+      `${process.env.REACT_APP_API_BASE_URL}/movies/deleteMovie/${movieId}`,
       {
         method: 'DELETE',
         headers: {
@@ -32,13 +32,13 @@ export default function DeleteWorkout({ workout, getWorkoutData }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        if (data.success === true) {
-          notyf.success('Workout successfully deleted');
-          getWorkoutData();
+        if (data.message === 'Movie deleted successfully') {
+          notyf.success(data.message);
+          getMovieData();
           deleteClose();
         } else {
           notyf.error('Something went wrong. Please try again');
-          getWorkoutData();
+          getMovieData();
           deleteClose();
         }
       });
@@ -46,8 +46,8 @@ export default function DeleteWorkout({ workout, getWorkoutData }) {
 
   return (
     <>
-      <Button variant="danger" className="px-1 py-0" onClick={deleteOpen}>
-        <i className="bi bi-trash"></i>
+      <Button variant="danger" className="w-100" onClick={deleteOpen}>
+        <i className="bi bi-trash"></i> Delete Movie
       </Button>
 
       <Modal show={showDelete} onHide={deleteClose}>
@@ -56,7 +56,7 @@ export default function DeleteWorkout({ workout, getWorkoutData }) {
         </Modal.Header>
         <Modal.Body className="bg-secondary">
           <p>
-            Are you sure you want to delete this workout? This action cannot be
+            Are you sure you want to delete this movie? This action cannot be
             undone.
           </p>
         </Modal.Body>
@@ -64,7 +64,7 @@ export default function DeleteWorkout({ workout, getWorkoutData }) {
           <Button variant="secondary" onClick={deleteClose}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={(e) => deleteWorkout(e, workoutId)}>
+          <Button variant="danger" onClick={(e) => deleteMovie(e, movieId)}>
             Delete
           </Button>
         </Modal.Footer>

@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import UserContext from '../UserContext';
+import logo from '../assets/Yuppy-ico.png';
 
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
@@ -27,6 +28,7 @@ export default function AppNavbar() {
           className="navbar-brand-title fw-bold"
           style={{ fontSize: '25px' }}
         >
+          <img src={logo} alt="" height="30px" />
           Yuppy
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
