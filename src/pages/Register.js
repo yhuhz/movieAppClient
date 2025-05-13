@@ -41,7 +41,6 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.message === 'Registered Successfully') {
           setEmail('');
           setPassword('');
