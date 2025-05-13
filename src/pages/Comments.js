@@ -100,27 +100,29 @@ export default function Comments() {
                   )}
                 </div>
 
-                <Form
-                  className="bg-dark mt-2"
-                  onSubmit={(e) => addComment(e, movieId)}
-                >
-                  <Form.Group className="d-flex">
-                    <Form.Control
-                      type="text"
-                      required
-                      value={comment}
-                      placeholder="Anything in mind?"
-                      onChange={(e) => setComment(e.target.value)}
-                    />
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      disabled={comment === ''}
-                    >
-                      Submit
-                    </Button>
-                  </Form.Group>
-                </Form>
+                {!user.isAdmin && (
+                  <Form
+                    className="bg-dark mt-2"
+                    onSubmit={(e) => addComment(e, movieId)}
+                  >
+                    <Form.Group className="d-flex">
+                      <Form.Control
+                        type="text"
+                        required
+                        value={comment}
+                        placeholder="Anything in mind?"
+                        onChange={(e) => setComment(e.target.value)}
+                      />
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        disabled={comment === ''}
+                      >
+                        Submit
+                      </Button>
+                    </Form.Group>
+                  </Form>
+                )}
               </Card.Body>
             </Card>
           </Col>
