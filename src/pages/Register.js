@@ -41,7 +41,7 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === 'Registered successfully') {
+        if (data.message === 'Registered Successfully') {
           setEmail('');
           setPassword('');
           setConfirmPassword('');
