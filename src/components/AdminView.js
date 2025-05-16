@@ -2,6 +2,7 @@ import { Card, Table } from 'react-bootstrap';
 import EditMovie from './EditMovie';
 import DeleteMovie from './DeleteMovie';
 import AddMovie from './AddMovie';
+import { Link } from 'react-router-dom';
 
 export default function UserView({ moviesData, getMoviesData }) {
   return (
@@ -33,7 +34,9 @@ export default function UserView({ moviesData, getMoviesData }) {
                 <th>Description</th>
                 <th>Year</th>
                 <th>Genre</th>
-                <th colSpan={2}>Action</th>
+                <th colSpan={3} className="text-center">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +48,14 @@ export default function UserView({ moviesData, getMoviesData }) {
                     <td>{movie.description}</td>
                     <td>{movie.year}</td>
                     <td>{movie.genre}</td>
+                    <td>
+                      <Link
+                        to={`/comments/${movie._id}`}
+                        className="btn btn-light"
+                      >
+                        <i class="bi bi-film"></i>
+                      </Link>
+                    </td>
                     <td>
                       <EditMovie movie={movie} getMovieData={getMoviesData} />
                     </td>
