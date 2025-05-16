@@ -40,7 +40,11 @@ export default function AddMovie({ getMovieData }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data._id) {
+        if (data.error) {
+          getMovieData();
+          notyf.error('Something went wrong. Please try again');
+          addClose();
+        } else {
           notyf.success('Movie added successfully');
           getMovieData();
           addClose();
@@ -49,10 +53,6 @@ export default function AddMovie({ getMovieData }) {
           setDescription('');
           setYear(1888);
           setGenre('');
-        } else {
-          getMovieData();
-          notyf.error('Something went wrong. Please try again');
-          addClose();
         }
       });
   };

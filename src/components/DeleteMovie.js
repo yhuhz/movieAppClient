@@ -32,12 +32,12 @@ export default function DeleteMovie({ movie, getMovieData }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === 'Movie deleted successfully') {
-          notyf.success(data.message);
+        if (data.error) {
+          notyf.error('Something went wrong. Please try again');
           getMovieData();
           deleteClose();
         } else {
-          notyf.error('Something went wrong. Please try again');
+          notyf.success(data.message);
           getMovieData();
           deleteClose();
         }
@@ -47,7 +47,7 @@ export default function DeleteMovie({ movie, getMovieData }) {
   return (
     <>
       <Button variant="danger" className="w-100" onClick={deleteOpen}>
-        <i className="bi bi-trash"></i> Delete Movie
+        <i className="bi bi-trash"></i>
       </Button>
 
       <Modal show={showDelete} onHide={deleteClose}>

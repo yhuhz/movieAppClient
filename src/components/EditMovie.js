@@ -44,12 +44,12 @@ export default function EditMovie({ movie, getMovieData }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === 'Movie updated successfully') {
-          notyf.success(data.message);
+        if (data.error) {
+          notyf.error('Something went wrong. Please try again');
           getMovieData();
           editClose();
         } else {
-          notyf.error('Something went wrong. Please try again');
+          notyf.success(data.message);
           getMovieData();
           editClose();
         }
@@ -59,7 +59,7 @@ export default function EditMovie({ movie, getMovieData }) {
   return (
     <>
       <Button variant="primary" className="w-100" onClick={() => editOpen()}>
-        <i className="bi bi-pencil-square"></i> Edit
+        <i className="bi bi-pencil-square"></i>
       </Button>
 
       <Modal show={showEdit} onHide={editClose}>

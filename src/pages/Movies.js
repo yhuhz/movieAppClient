@@ -2,8 +2,8 @@ import { Card } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../UserContext';
 import { useContext, useEffect, useState } from 'react';
-import AddMovie from '../components/AddMovie';
 import UserView from '../components/UserView';
+import AdminView from '../components/AdminView';
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -54,25 +54,11 @@ export default function Home() {
     <Navigate to="/" />
   ) : (
     <div className="mb-5">
-      <div className="d-flex justify-content-center mt-5">
-        <Card className="p-4 text-center bg-dark">
-          <Card.Body>
-            <h1>Welcome to Yuppy!</h1>
-            <div className="d-flex justify-content-center">
-              <h6
-                className="text-light text-center py-3"
-                style={{ maxWidth: '400px' }}
-              >
-                Let's find your favorite movies!
-              </h6>
-            </div>
-            {user.isAdmin ? <AddMovie getMovieData={getMoviesData} /> : ''}
-          </Card.Body>
-        </Card>
-      </div>
-
-      <hr className="my-3" />
-      {!user.isAdmin ? <UserView moviesData={moviesData} /> : ''}
+      {user.isAdmin ? (
+        <AdminView moviesData={moviesData} getMoviesData={getMoviesData} />
+      ) : (
+        <UserView moviesData={moviesData} />
+      )}
     </div>
   );
 }
