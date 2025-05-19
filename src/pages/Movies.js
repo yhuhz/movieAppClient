@@ -31,28 +31,36 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getMoviesData();
-  }, [user]);
+    if (user.id !== null) {
+      getMoviesData();
+    }
+  }, [user.isAdmin]);
 
-  return isLoading ? (
-    <div className="d-flex justify-content-center mt-5">
-      <Card className="p-4 text-center bg-dark">
-        <Card.Body>
-          <h1>Welcome to Yuppy!</h1>
-          <div className="d-flex justify-content-center">
-            <h6
-              className="text-light text-center py-3"
-              style={{ maxWidth: '400px' }}
-            >
-              Loading Movies
-            </h6>
-          </div>
-        </Card.Body>
-      </Card>
-    </div>
-  ) : user.id === null ? (
-    <Navigate to="/" />
-  ) : (
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <Card className="p-4 text-center bg-dark">
+          <Card.Body>
+            <h1>Welcome to Yuppy!</h1>
+            <div className="d-flex justify-content-center">
+              <h6
+                className="text-light text-center py-3"
+                style={{ maxWidth: '400px' }}
+              >
+                Loading Movies...
+              </h6>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!user?.id) {
+    return <Navigate to="/" />;
+  }
+
+  return (
     <div className="mb-5">
       {user.isAdmin ? (
         <AdminView moviesData={moviesData} getMoviesData={getMoviesData} />
